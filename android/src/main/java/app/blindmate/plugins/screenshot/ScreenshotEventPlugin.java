@@ -1,4 +1,7 @@
-package app.blindmate.plugins;
+package app.blindmate.plugins.screenshot;
+
+import android.os.Handler;
+import android.os.Looper;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -9,7 +12,7 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 @CapacitorPlugin(name = "ScreenshotEvent")
 public class ScreenshotEventPlugin extends Plugin {
 
-    private ScreenshotEvent implementation = new ScreenshotEvent();
+    private ScreenshotEvent implementation = new ScreenshotEvent(new Handler(Looper.getMainLooper()));
 
     @PluginMethod
     public void echo(PluginCall call) {
