@@ -1,21 +1,31 @@
 package app.blindmate.plugins.screenshot;
 
-import android.database.ContentObserver;
-import android.net.Uri;
-import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class ScreenshotEvent extends ContentObserver {
-
-    public ScreenshotEvent(Handler handler) {
-        super(handler);
+public class ScreenshotEvent {
+    interface ScreenshotEventListener {
+        void onScreenshotEvent(String event, int size);
     }
 
-    @Override
-    public void onChange(boolean selfChange, @Nullable Uri uri) {
-        super.onChange(selfChange, uri);
+    private AppCompatActivity activity;
+
+    @Nullable
+    public ScreenshotEventListener getScreenshotEventListener() {
+        return screenshotEventListener;
+    }
+
+    public void setScreenshotEventListener(@Nullable ScreenshotEventListener keyboardEventListener) {
+        this.screenshotEventListener = keyboardEventListener;
+    }
+
+    @Nullable
+    private ScreenshotEventListener screenshotEventListener;
+
+    public ScreenshotEvent(AppCompatActivity activity) {
+        this.activity = activity;
     }
 
     public String echo(String value) {

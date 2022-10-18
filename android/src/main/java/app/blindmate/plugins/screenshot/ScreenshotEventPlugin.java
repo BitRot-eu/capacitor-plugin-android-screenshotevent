@@ -12,8 +12,26 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 @CapacitorPlugin(name = "ScreenshotEvent")
 public class ScreenshotEventPlugin extends Plugin {
 
-    private ScreenshotEvent implementation = new ScreenshotEvent(new Handler(Looper.getMainLooper()));
+    private ScreenshotEvent implementation;
 
+    @Override
+    public void load() {
+        execute(
+                () -> {
+                    implementation = new ScreenshotEvent(getActivity());
+                    implementation.setScreenshotEventListener(this::onScreenshotEvent);
+                }
+        );
+    }
+
+    private void onScreenshotEvent(String event, int size) {
+
+    }
+
+    @Override
+    protected void handleOnDestroy() {
+        implementation.setScreenshotEventListener(null);
+    }
     @PluginMethod
     public void echo(PluginCall call) {
         String value = call.getString("value");
