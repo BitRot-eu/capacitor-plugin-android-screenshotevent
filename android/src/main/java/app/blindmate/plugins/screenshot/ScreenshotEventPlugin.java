@@ -25,7 +25,11 @@ public class ScreenshotEventPlugin extends Plugin {
     }
 
     private void onScreenshotEvent(String event, int size) {
-
+        JSObject ssData = new JSObject();
+        ssData.put("screenshot", "captured");
+        ssData.put("data1", event);
+        ssData.put("data2", size);
+        notifyListeners(event, ssData);
     }
 
     @Override
