@@ -45,7 +45,7 @@ public class ScreenshotEvent {
                     if(ar.process.equals("com.android.systemui:screenshot")){
                         Log.i("Screenshot", "captured");
                         if (screenshotEventListener != null) {
-                            screenshotEventListener.onScreenshotEvent("foo", 1);
+                            screenshotEventListener.onScreenshotEvent("screenshot", 1);
                         }
                     }
                 }
